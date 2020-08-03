@@ -1,48 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Router } from '@reach/router';
+import React, { useEffect, useState } from 'react';
 import { navigate } from 'gatsby';
+import { Router } from '@reach/router';
 import IdentityModal from 'react-netlify-identity-widget';
-import 'react-netlify-identity-widget/styles.css';
 import Layout from '../components/layout';
 import Profile from '../components/profile';
 import PrivateRoute from '../components/private-route';
-import { useIdentityContext } from 'react-netlify-identity';
+import RouteBase from '../components/route-base';
+import RouteSecret from '../components/route-secret';
+import RouteLogin from '../components/route-login';
 
-const SecretStuff = () => <h1>This is super secret stuff!</h1>;
-const AllYourBase = () => <h1>All Your Base Are Belong to Us!</h1>;
-
-const Login = ({ openLogin }) => {
-  const identity = useIdentityContext();
-
-  if (identity && identity.isLoggedIn) {
-    navigate('/dashboard/secret', { replace: true });
-  }
-
-  return (
-    <>
-      <h1>Log In or Sign Up</h1>
-      <button onClick={openLogin}>Log In</button>
-    </>
-  );
-};
+import 'react-netlify-identity-widget/styles.css';
 
 const Dashboard = ({ location }) => {
   const [isVisible, setVisibility] = useState(false);
-  const showModal = () => setVisibility(true);
-
   useEffect(() => {
     if (location.pathname.match(/^\/dashboard\/?$/)) {
       navigate('/dashboard/login', { replace: true });
     }
-  }, [location.pathname]);
+  }, []);
+
+  const showModal = () => setVisibility(true);
 
   return (
     <Layout>
       <Profile showModal={showModal} />
       <Router>
-        <Login path="/dashboard/login" openLogin={showModal} />
-        <PrivateRoute path="/dashboard/secret" component={SecretStuff} />
-        <PrivateRoute path="/dashboard/base" component={AllYourBase} />
+        <PrivateRoute path="/dashboard/base" component={RouteBase} />
+        <PrivateRoute path="/dashboard/secret" component={RouteSecret} />
+        <RouteLogin path="/dashboard/login" showModal={showModal} />
       </Router>
       <IdentityModal
         showDialog={isVisible}

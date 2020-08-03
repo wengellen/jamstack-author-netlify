@@ -1,10 +1,6 @@
-exports.onCreatePage = async ({ page, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
-
+exports.onCreatePage = ({ page, actions }) => {
   if (page.path.match(/^\/dashboard/)) {
     page.matchPath = '/dashboard/*';
-
-    // Update the page.
-    createPage(page);
+    actions.createPage(page);
   }
 };

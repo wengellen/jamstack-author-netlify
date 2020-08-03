@@ -10,11 +10,9 @@
   },
   "dependencies": {
     "@reach/dialog": "^0.3.0",
-    "@reach/router": "^1.3.4",
     "@reach/tabs": "^0.3.0",
     "@reach/visually-hidden": "^0.3.0",
-    "gatsby": "^2.16.5",
-    "gatsby-plugin-compile-es6-packages": "^2.1.0",
+    "gatsby": "^2.17.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-netlify-identity": "^0.1.9",

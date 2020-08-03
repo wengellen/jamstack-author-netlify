@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { useIdentityContext } from 'react-netlify-identity-widget';
+import { useIdentityContext } from 'react-netlify-identity';
 
 const Profile = ({ showModal }) => {
   const identity = useIdentityContext();
   const isLoggedIn = identity && identity.isLoggedIn;
+
   const name =
     identity &&
     identity.user &&
